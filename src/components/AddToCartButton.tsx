@@ -2,8 +2,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Check, Divide } from "lucide-react";
+import { useCart } from "@/hooks/useCart";
+import { Product } from "@/payload-types";
 
-const AddToCartButton = () => {
+const AddToCartButton = ({ product }: { product: Product }) => {
+  const { addItem } = useCart();
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
 
   useEffect(() => {
@@ -16,6 +19,7 @@ const AddToCartButton = () => {
   return (
     <Button
       onClick={() => {
+        addItem(product);
         setAddedToCart(true);
       }}
       size="lg"
