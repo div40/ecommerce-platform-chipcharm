@@ -1,5 +1,6 @@
 import { formatPrice } from "../../lib/utils";
 import { Product } from "../../payload-types";
+import * as React from "react";
 
 import {
   Body,

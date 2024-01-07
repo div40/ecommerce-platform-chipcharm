@@ -23,11 +23,19 @@ const NavItems = () => {
     };
   }, []);
 
-  useOnClickOutside(navRef, () => setActiveIndex(null));
+  useOnClickOutside(
+    // @ts-expect-error
+    navRef,
+    () => setActiveIndex(null)
+  );
 
   const isAnyOpen = activeIndex !== null;
   return (
-    <div className="flex gap-4 h-full" ref={navRef}>
+    <div
+      className="flex gap-4 h-full"
+      // @ts-expect-error
+      ref={navRef}
+    >
       {PRODUCT_CATEGORIES.map((category, i) => {
         const handleOpen = () => {
           activeIndex === i ? setActiveIndex(null) : setActiveIndex(i);
