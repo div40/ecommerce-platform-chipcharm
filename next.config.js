@@ -7,6 +7,10 @@ const nextConfig = {
                 pathname: "**",
                 port: "3000",
                 protocol: "http"
+            },
+            {
+                hostname: "div-chipcharm.up.railway.app",
+                protocol: "https"
             }
         ]
     }
