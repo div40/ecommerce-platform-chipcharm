@@ -1,4 +1,4 @@
-import { VerificationEmailHtml } from "@/components/emails/VerificationEmail";
+import { VerificationEmailHtml } from "../components/emails/VerificationEmail";
 import { Access, CollectionConfig } from "payload/types";
 
 
