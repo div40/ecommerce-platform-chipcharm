@@ -19,6 +19,7 @@ export interface Config {
 }
 export interface User {
   id: string;
+  products?: (string | Product)[] | null;
   role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
