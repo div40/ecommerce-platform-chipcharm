@@ -1,7 +1,7 @@
 
 import { PRODUCT_CATEGORIES } from "../../config";
-import { CollectionConfig } from "payload/types";
-import { Product } from "../../payload-types";
+import { Access, CollectionConfig } from "payload/types";
+import { Product, User } from "../../payload-types";
 import { stripe } from "../../lib/stripe";
 import { AfterChangeHook, BeforeChangeHook } from "payload/dist/collections/config/types";
 
@@ -40,12 +40,41 @@ const syncUser: AfterChangeHook<Product> = async ({req,doc}) => {
         })
     }
 }
+
+const isAdminOrHasAccess = (): Access => ({req: {user: _user}}) => {
+    const user = _user as User | undefined
+
+    if(!user) return false
+
+    if(user.role === "admin") return true
+
+    const userProductIds = (user.products || []).reduce<Array<string>>((acc, product) => {
+        if(!product) return acc
+        if(typeof product === "string"){
+            acc.push(product)
+        } else {
+            acc.push(product.id)
+        }
+        return acc
+    }, [])
+
+    return {
+        id: {
+            in: userProductIds
+        }
+    }
+
+}
 export const Products: CollectionConfig = {
     slug: "products",
     admin: {
         useAsTitle: "name"
     },
-    access: {},
+    access: {
+        read: isAdminOrHasAccess(),
+        update: isAdminOrHasAccess(),
+        delete: isAdminOrHasAccess(),
+    },
     hooks: {
         afterChange: [syncUser],
         beforeChange: [
