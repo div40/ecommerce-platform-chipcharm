@@ -9,7 +9,7 @@ const nextConfig = {
                 protocol: "http"
             },
             {
-                hostname: "div-chipcharm.up.railway.app",
+                hostname: "ecommerce-platform-chipcharm.vercel.app",
                 protocol: "https"
             }
         ]
