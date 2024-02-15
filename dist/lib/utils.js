@@ -1,6 +1,17 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatPrice = exports.cn = void 0;
+exports.constructMetadata = exports.formatPrice = exports.cn = void 0;
 var clsx_1 = require("clsx");
 var tailwind_merge_1 = require("tailwind-merge");
 function cn() {
@@ -23,3 +34,17 @@ function formatPrice(price, options) {
     }).format(numericPrice);
 }
 exports.formatPrice = formatPrice;
+function constructMetadata(_a) {
+    var _b = _a === void 0 ? {} : _a, _c = _b.title, title = _c === void 0 ? 'Chipcharm - Your one stop destination to build your Dream PC' : _c, _d = _b.description, description = _d === void 0 ? 'Chipcharm is your one stop destination to build your Dream PC.' : _d, _e = _b.icons, icons = _e === void 0 ? '/favicon.ico' : _e, _f = _b.noIndex, noIndex = _f === void 0 ? false : _f;
+    return __assign({ title: title, description: description, openGraph: {
+            title: title,
+            description: description,
+            images: [],
+        }, icons: icons, metadataBase: new URL('https://div-chipcharm.up.railway.app/') }, (noIndex && {
+        robots: {
+            index: false,
+            follow: false,
+        },
+    }));
+}
+exports.constructMetadata = constructMetadata;
